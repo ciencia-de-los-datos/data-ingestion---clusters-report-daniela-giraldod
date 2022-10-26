@@ -10,6 +10,7 @@ espacio entre palabra y palabra.
 
 """
 import pandas as pd
+import re 
 
 
 def ingest_data():
@@ -17,9 +18,8 @@ def ingest_data():
     #
     # Inserte su código aquí
     #
+   
     
-    import pandas as pd
-    import re 
 
     ### llamar base de datos
     #def load_file(url):
