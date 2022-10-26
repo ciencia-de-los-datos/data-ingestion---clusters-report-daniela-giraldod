@@ -23,7 +23,7 @@ def ingest_data():
 
     ### llamar base de datos
     #def load_file(url):
-    with open("clusters_report.txt", "r") as file:
+    with open("clusters_report.txt") as file:
       data = file.readlines()
     
     data = data[4:]  ## seleccionar sin titulos
