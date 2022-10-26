@@ -29,12 +29,6 @@ def ingest_data():
     data = data[4:]  ## seleccionar sin titulos
     data = [line.replace("\n","") for line in data]   #organizar espacios y cambios de linea
     data = [line.strip() for line in data]
-
-    data = data[4:]  ## seleccionar sin titulos
-    data = [line.replace("\n","") for line in data]   #organizar espacios y cambios de linea
-    data = [line.strip() for line in data]
-
-
     lista = []
     
     cadena = ''
