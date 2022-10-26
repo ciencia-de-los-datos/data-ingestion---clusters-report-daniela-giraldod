@@ -60,10 +60,13 @@ def ingest_data():
         df[list(df.columns)[index]] = [element[index] for element in datos]  #asignar a cada titulo una columna
         index +=1
         
-     df = pd.DataFrame(df)
-     df["principales_palabras_clave"] = df["principales_palabras_clave"].apply(lambda x : str(x).replace("   "," ").strip())
-     df["principales_palabras_clave"] = df["principales_palabras_clave"].apply(lambda x : str(x).replace("  "," ").strip())
-     df["principales_palabras_clave"] = df["principales_palabras_clave"].apply(lambda x : str(x).replace("."," ").strip())
+     #df = pd.DataFrame(df)
+    
+     df["principales_palabras_clave"] = [line.replace('   ', ' ') for line in df["principales_palabras_clave"]]
+     df["principales_palabras_clave"] = [line.replace('  ', ' ') for line in df["principales_palabras_clave"]]
+     df["principales_palabras_clave"] = [line.replace('.', ' ') for line in df["principales_palabras_clave"]]
+        
+    #[line.replace('   ', ' ') for line in principales_palabras_clave]
     
      df["porcentaje_de_palabras_clave"] = df["porcentaje_de_palabras_clave"].astype('float')
     
