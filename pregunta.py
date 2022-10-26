@@ -35,30 +35,30 @@ def ingest_data():
     data = [line.strip() for line in data]
 
 
-    listas = []
+    lista = []
     
-    espacios = ''
-    indice = 0
-    #ciclo para andar renglon por renglon
-    while indice < len(data):   
-        if data[indice] != '':
-            espacios += ' ' + data[indice]
+    cadena = ''
+    index = 0
+    while index < len(data):
+        if data[index] != '':
+            cadena += ' ' + data[index]
         else:
-            listas.append(espacios)
-            espacios = ''
-        indice +=1  #contador
+            lista.append(cadena)
+            cadena = ''
+        index +=1
 
-    listas = [line.strip() for line in listas]   #quitar espacios
+
+    lista = [line.strip() for line in lista]   #quitar espacios
 
     info = []
-    for index in listas:
+    for index in lista:
         regular = re.search(r'(^[0-9]+)\W+([0-9]+)\W+([0-9]+)([!#$%&*+-.^_`|~:\[\]]+)(\d+)(\W+)(.+)', index)
         linea = regular.group(1) + '*' + regular.group(2) + '*' + regular.group(3) + '.' + regular.group(5) + '*' + regular.group(7)
         info.append(linea)
     datos = [line.split('*') for line in info]
-    #df = pd.DataFrame(columns = ['cluster', 'cantidad_de_palabras_clave', 'porcentaje_de_palabras_clave', 'principales_palabras_clave'])
-
     df = pd.DataFrame(columns = ['cluster', 'cantidad_de_palabras_clave', 'porcentaje_de_palabras_clave', 'principales_palabras_clave'])
+
+    #df = pd.DataFrame(columns = ['cluster', 'cantidad_de_palabras_clave', 'porcentaje_de_palabras_clave', 'principales_palabras_clave'])
 
     #convertir lista de listas a df
     index = 0
