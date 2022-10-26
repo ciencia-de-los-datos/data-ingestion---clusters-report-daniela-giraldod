@@ -48,10 +48,10 @@ def ingest_data():
             espacios = ''
         indice +=1  #contador
 
-    listas = [line.strip() for line in lista]   #quitar espacios
+    listas = [line.strip() for line in listas]   #quitar espacios
 
     info = []
-    for index in lista:
+    for index in listas:
         regular = re.search(r'(^[0-9]+)\W+([0-9]+)\W+([0-9]+)([!#$%&*+-.^_`|~:\[\]]+)(\d+)(\W+)(.+)', index)
         linea = regular.group(1) + '*' + regular.group(2) + '*' + regular.group(3) + '.' + regular.group(5) + '*' + regular.group(7)
         info.append(linea)
