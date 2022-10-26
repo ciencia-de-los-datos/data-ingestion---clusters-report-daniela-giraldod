@@ -32,14 +32,15 @@ def ingest_data():
     lista = []
     
     cadena = ''
-    index = 0
+    indice = 0
+    #ciclo para andar renglon por renglon
     while index < len(data):
-        if data[index] != '':
-            cadena += ' ' + data[index]
+        if data[indice] != '':
+            cadena += ' ' + data[indice]
         else:
             lista.append(cadena)
             cadena = ''
-        index +=1
+        indice +=1
 
 
     lista = [line.strip() for line in lista]   #quitar espacios
@@ -50,9 +51,8 @@ def ingest_data():
         linea = regular.group(1) + '*' + regular.group(2) + '*' + regular.group(3) + '.' + regular.group(5) + '*' + regular.group(7)
         info.append(linea)
     datos = [line.split('*') for line in info]
+    #nombre de columnas
     df = pd.DataFrame(columns = ['cluster', 'cantidad_de_palabras_clave', 'porcentaje_de_palabras_clave', 'principales_palabras_clave'])
-
-    #df = pd.DataFrame(columns = ['cluster', 'cantidad_de_palabras_clave', 'porcentaje_de_palabras_clave', 'principales_palabras_clave'])
 
     #convertir lista de listas a df
     index = 0
@@ -62,25 +62,18 @@ def ingest_data():
         
      #df = pd.DataFrame(df)
     
-    principales_palabras_clave = [line[3].replace('    ', ' ') for line in datos]
-    principales_palabras_clave = [line.replace('   ', ' ') for line in principales_palabras_clave]
-    principales_palabras_clave = [line.replace('  ', ' ') for line in principales_palabras_clave]
-    principales_palabras_clave = [line.replace('.', '') for line in principales_palabras_clave]
-    principales_palabras_clave = [line.split(',') for line in principales_palabras_clave]
-    principales_palabras_clave = [[element.strip() for element in line] for line in principales_palabras_clave]
-    principales_palabras_clave = [', '.join(line) for line in principales_palabras_clave]
+    palabras = [line[3].replace('    ', ' ') for line in datos]
+    palabras = [line.replace('   ', ' ') for line in palabras]
+    palabras = [line.replace('  ', ' ') for line in palabras]
+    palabras = [line.replace('.', '') for line in palabras]
+    palabras = [line.split(',') for line in palabras]
+    palabras = [[element.strip() for element in line] for line in palabras]
+    palabras = [', '.join(line) for line in palabras]
     
-     #df["principales_palabras_clave"] = [line.replace('   ', ' ') for line in df["principales_palabras_clave"]]
-     #df["principales_palabras_clave"] = [line.replace('  ', ' ') for line in df["principales_palabras_clave"]]
-     #df["principales_palabras_clave"] = [line.replace('.', ' ') for line in df["principales_palabras_clave"]]
-        
-    #[line.replace('   ', ' ') for line in principales_palabras_clave]
     
-     #df["porcentaje_de_palabras_clave"] = df["porcentaje_de_palabras_clave"].astype('float')
-    df.principales_palabras_clave = principales_palabras_clave
-    df.cluster = df.cluster.astype('int')
-    df.cantidad_de_palabras_clave = df.cantidad_de_palabras_clave.astype('int')
+    df.principales_palabras_clave = palabras
+    df.cluster = df.cluster.astype('int')  #volver el numero entero
+    df.cantidad_de_palabras_clave = df.cantidad_de_palabras_clave.astype('int') #volver entero
     df.porcentaje_de_palabras_clave = df.porcentaje_de_palabras_clave.astype('float')
-    
-    
+        
     return df
