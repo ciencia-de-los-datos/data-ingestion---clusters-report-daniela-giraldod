@@ -34,7 +34,7 @@ def ingest_data():
     cadena = ''
     indice = 0
     #ciclo para andar renglon por renglon
-    while index < len(data):
+    while indice < len(data):
         if data[indice] != '':
             cadena += ' ' + data[indice]
         else:
