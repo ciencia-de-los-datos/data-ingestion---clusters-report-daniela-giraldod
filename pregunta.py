@@ -62,12 +62,25 @@ def ingest_data():
         
      #df = pd.DataFrame(df)
     
-     df["principales_palabras_clave"] = [line.replace('   ', ' ') for line in df["principales_palabras_clave"]]
-     df["principales_palabras_clave"] = [line.replace('  ', ' ') for line in df["principales_palabras_clave"]]
-     df["principales_palabras_clave"] = [line.replace('.', ' ') for line in df["principales_palabras_clave"]]
+    principales_palabras_clave = [line[3].replace('    ', ' ') for line in datos]
+    principales_palabras_clave = [line.replace('   ', ' ') for line in principales_palabras_clave]
+    principales_palabras_clave = [line.replace('  ', ' ') for line in principales_palabras_clave]
+    principales_palabras_clave = [line.replace('.', '') for line in principales_palabras_clave]
+    principales_palabras_clave = [line.split(',') for line in principales_palabras_clave]
+    principales_palabras_clave = [[element.strip() for element in line] for line in principales_palabras_clave]
+    principales_palabras_clave = [', '.join(line) for line in principales_palabras_clave]
+    
+     #df["principales_palabras_clave"] = [line.replace('   ', ' ') for line in df["principales_palabras_clave"]]
+     #df["principales_palabras_clave"] = [line.replace('  ', ' ') for line in df["principales_palabras_clave"]]
+     #df["principales_palabras_clave"] = [line.replace('.', ' ') for line in df["principales_palabras_clave"]]
         
     #[line.replace('   ', ' ') for line in principales_palabras_clave]
     
-     df["porcentaje_de_palabras_clave"] = df["porcentaje_de_palabras_clave"].astype('float')
+     #df["porcentaje_de_palabras_clave"] = df["porcentaje_de_palabras_clave"].astype('float')
+    df.principales_palabras_clave = principales_palabras_clave
+    #df.cluster = df.cluster.astype('int')
+    #df.cantidad_de_palabras_clave = df.cantidad_de_palabras_clave.astype('int')
+    #df.porcentaje_de_palabras_clave = df.porcentaje_de_palabras_clave.astype('float')
+    
     
     return df
